@@ -1,0 +1,9 @@
+# 此文件用于保留空目录在 Git 中的存在
+
+实际项目运行后，此目录会存放示例文档：
+- requirements.example.md
+- plan.example.md
+- tasks.example.md
+- acceptance.example.md
+
+这些示例文档展示如何编写项目文档。

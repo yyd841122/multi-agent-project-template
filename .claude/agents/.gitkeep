@@ -1,0 +1,8 @@
+# 此文件用于保留空目录在 Git 中的存在
+
+实际项目运行后，此目录会存放 Agent 模板：
+- planner.md
+- developer.md
+- tester.md
+
+这些模板定义了各 Agent 的角色、职责、工作边界和执行流程。

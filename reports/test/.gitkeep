@@ -1,0 +1,3 @@
+# Keep this directory in Git.
+# Generated test reports will be stored here when a project runs.
+# Format: reports/test/task-xxx-test-report.md

@@ -1,0 +1,6 @@
+# 此文件用于保留空目录在 Git 中的存在
+
+实际项目运行后，此目录会存放经验知识库：
+- lessons.md（已验证有效的正向经验）
+- pitfalls.md（错误细节、踩坑案例、风险模式）
+- skills-candidates.md（未来可能抽象为 Skill 的候选）

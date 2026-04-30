@@ -1,0 +1,3 @@
+# Keep this directory in Git.
+# Generated development reports will be stored here when a project runs.
+# Format: reports/dev/task-xxx-dev-report.md
