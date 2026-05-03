@@ -25,9 +25,9 @@
 
 ## 2. 模板来源
 
-本模板基于 `todo-agent-workflow-demo` 项目的验证经验提取。
+本模板基于 `todo-agent-workflow-demo` 和 `mini-notes-agent-demo` 两个项目的验证经验提取。
 
-**验证项目**：todo-agent-workflow-demo
+**第一个验证项目**：todo-agent-workflow-demo
 
 **验证成果**：
 - 完成任务：21 个（T001-T022）
@@ -36,12 +36,25 @@
 - 协作循环：12 个（T001-T012）
 - 文档整理：8 个任务（T013-T020）
 
+**第二个验证项目**：mini-notes-agent-demo
+
+**验证成果**：
+- 完成任务：12 个（T001-T012）
+- 通过率：100%
+- 修正循环：0 次
+- 协作类型：纯前端笔记应用
+- 验证目标：验证模板可以从 Todo 项目复用到前端应用项目
+
 **关键经验**：
-- ✅ 验证了多 Agent 协作的可行性
+- ✅ 验证了多 Agent 协作的可行性（两次验证）
 - ✅ 验证了独立开发与独立验收流程
 - ✅ 验证了修正循环机制
+- ✅ 验证了模板的可复用性（不同业务场景）
 - ✅ 沉淀了可复用的协作经验
 - ✅ 发现了 Task 012 的经典踩坑案例（重构破坏历史功能）
+- ✅ 发现了 README 任务上下文控制经验
+- ✅ 发现了优化任务边界控制经验
+- ✅ 发现了 Git 代理排查经验
 
 ---
 
@@ -328,13 +341,16 @@ cd your-new-project
 
 | 文件 | 说明 | 内容量 |
 |------|------|--------|
-| `memory/lessons.md` | 已验证有效的正向经验 | 587 行，9 个部分 |
-| `memory/pitfalls.md` | 踩坑风险和避免方法 | 827 行，11 个部分 |
-| `memory/skills-candidates.md` | 未来可抽象为 Skill 的候选 | 519 行，7 个候选 |
+| `memory/lessons.md` | 已验证有效的正向经验 | 10 个部分（含第二个验证项目经验） |
+| `memory/pitfalls.md` | 踩坑风险和避免方法 | 13 个部分（含第二个验证项目风险） |
+| `memory/skills-candidates.md` | 未来可抽象为 Skill 的候选 | 7 个候选 |
 
 **经典案例**：
 - Task 012 的 trim() 案例（记录在 `memory/pitfalls.md` 第 10 章）
 - 修正循环经验（记录在 `memory/lessons.md` 第 5 章）
+- README 任务上下文控制经验（记录在 `memory/lessons.md` 第 10.2 节）
+- 优化任务边界控制经验（记录在 `memory/lessons.md` 第 10.3 节）
+- Git 代理排查经验（记录在 `memory/lessons.md` 第 10.5 节）
 
 ### 10.4 报告目录
 
@@ -466,6 +482,7 @@ cd your-new-project
 
 **验证项目**：
 - todo-agent-workflow-demo（21 个任务，100% 通过率）
+- mini-notes-agent-demo（12 个任务，100% 通过率）
 
 **核心文档**：
 - `template-usage.md` - 详细使用说明
@@ -476,11 +493,13 @@ cd your-new-project
 
 ---
 
-**模板版本**: v1.0
+**模板版本**: v1.1
 
 **创建日期**: 2026-04-30
 
-**基于项目**: todo-agent-workflow-demo（T001-T022 完整验证）
+**更新日期**: 2026-05-03
+
+**基于项目**: todo-agent-workflow-demo（T001-T022 完整验证）、mini-notes-agent-demo（T001-T012 完整验证）
 
 **适用场景**: Claude Code 多 Agent 协作开发项目
 

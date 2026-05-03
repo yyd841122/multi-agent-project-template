@@ -99,6 +99,21 @@ Thumbs.db
 - [ ] 执行 `git commit -m "Initial commit from multi-agent-project-template"`
 - [ ] 确认提交成功
 
+### 3.4 Git 推送前检查（可选）
+
+如果计划推送到远程仓库（如 GitHub）：
+- [ ] 检查工作区状态：`git status --short`
+- [ ] 检查远程仓库配置：`git remote -v`
+- [ ] 检查当前分支：`git branch --show-current`
+- [ ] 检查最近提交：`git log --oneline -1`
+- [ ] 检查代理配置（如有）：`git config --get http.proxy`
+- [ ] 检查代理端口是否监听（如有）：`netstat -ano | findstr <port>`
+- [ ] 测试代理连接（如有）：`curl.exe -I -x http://127.0.0.1:<port> https://github.com`
+
+**常见问题**：
+- 如果代理端口未运行，需要启动代理软件或取消代理配置
+- 如果代理协议错误，修改 `http://` 为 `socks5://` 或反之
+
 ---
 
 ## 4. 阶段 3：编写需求文档
@@ -508,10 +523,12 @@ Get-Content -Encoding UTF8 docs\workflow.md -TotalCount 40
 
 ---
 
-**检查清单版本**: v1.0
+**检查清单版本**: v1.1
 
 **创建日期**: 2026-04-30
 
-**基于项目**: multi-agent-project-template（来自 todo-agent-workflow-demo）
+**更新日期**: 2026-05-03
+
+**基于项目**: multi-agent-project-template（来自 todo-agent-workflow-demo、mini-notes-agent-demo）
 
 **适用场景**: Claude Code 多 Agent 协作开发项目初始化

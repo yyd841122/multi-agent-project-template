@@ -37,6 +37,12 @@
 - 不直接测试
 - 只做调度和决策
 
+**重要边界**（来自 mini-notes-agent-demo 验证）:
+- **Developer 完成不等于任务完成**：必须等待 Tester 独立验收并 PASS 后，才能更新任务状态为 `completed`
+- **不应跳过 Tester**：即使任务看起来很简单，也不能跳过独立验收环节
+- **分步执行指令**：不应一次性发出"完成并测试任务"的指令，应分步执行（Developer → Tester → 主 Agent 决策）
+- **流程完整性检查**：如果发现缺少开发报告或测试报告，需要追加检查任务补齐流程
+
 ---
 
 ### 2.2 计划 Agent (Planner)
@@ -111,6 +117,11 @@ STATUS=done
 - **不修改 `docs/tasks.md` 的任务状态**（由主 Agent 负责）
 - 不修改验收文档
 
+**重要边界**（来自 mini-notes-agent-demo 验证）:
+- **README 任务控制上下文**：编写 README 时，不要读取全部历史 reports。只读取核心文档（`docs/requirements.md`、`docs/tasks.md`、`docs/workflow.md`、`worklog.md`），报告目录只统计数量
+- **优化任务边界**：优化类任务只允许轻量优化（颜色、间距、hover 效果），不允许重写业务逻辑、改变历史功能行为、改动数据结构、提前实现扩展功能
+- **保留用户原始输入**：除非需求文档明确要求清洗数据，否则保留用户原始输入。`trim()`、`toLowerCase()` 等方法只用于判断，不用于修改最终保存的值
+
 ---
 
 ### 2.4 测试 Agent (Tester)
@@ -153,6 +164,11 @@ REASON=[失败原因简述]
 - **不修改 `docs/tasks.md` 的任务状态**（由主 Agent 负责）
 - 提供详细的测试反馈
 - 谁提出的 bug 谁复测
+
+**重要边界**（来自 mini-notes-agent-demo 验证）:
+- **独立验收核心**：不能只看开发报告就 PASS，必须读取实际代码并逐项对照验收标准
+- **优化任务重点检查**：验收优化任务时，重点检查是否改变了历史功能行为、是否重写了业务逻辑、是否改动数据结构
+- **数据处理检查**：检查用户输入是否被意外修改（如被 trim()、toLowerCase() 等方法处理）
 
 ---
 
@@ -748,6 +764,62 @@ REASON=[失败原因简述，不超过 50 字]
 
 ---
 
-**文档版本**: v2.0
+## 13. 下一阶段自动化方向（规划中）
+
+### 13.1 自动化目标
+
+本协作流程已经通过两个项目验证（todo-agent-workflow-demo、mini-notes-agent-demo），证明了多 Agent 协作的可行性。
+
+下一阶段的自动化目标是：
+
+**减少人工在 ChatGPT 和 Claude Code 之间复制粘贴**，让主 Agent 可以：
+- 自动读取任务列表
+- 自动调用模型
+- 自动生成 Developer/Tester 指令
+- 自动执行状态更新
+
+### 13.2 自动化方向
+
+**短期方向**（手动操作优化）：
+1. 优化主 Agent 提示词，减少手动复制粘贴
+2. 标准化任务分配指令格式
+3. 标准化报告格式，便于解析
+
+**中期方向**（工具辅助）：
+1. 开发脚本辅助更新 `docs/tasks.md` 状态
+2. 开发脚本辅助生成 worklog.md 记录
+3. 开发脚本检查报告完整性
+
+**长期方向**（自动化工作流）：
+1. 实现 workflow-controller Skill：控制主 Agent 按照固定流程执行
+2. 实现 task-report-generator Skill：自动生成标准化的开发报告和测试报告
+3. 实现 fix-loop-controller Skill：控制测试失败后的修正循环
+
+### 13.3 当前策略
+
+**当前只做方向说明，不实现自动化代码**：
+- 理由：流程需要更多项目验证，避免过早固化
+- 理由：Claude Code 本身能力在演进，等待更好的 API
+- 策略：继续积累经验，记录到 `memory/skills-candidates.md`
+- 触发：待 3-5 个项目验证后，再评估自动化方案
+
+### 13.4 Skill 候选记录
+
+当前阶段将可能的自动化方向记录到 `memory/skills-candidates.md`：
+- workflow-controller
+- task-report-generator
+- fix-loop-controller
+- agent-id-recorder
+- regression-test-checklist
+- memory-updater
+- project-summary-generator
+
+这些候选经过多个项目验证后，可以升级为真正的 Claude Code Skill。
+
+---
+
+**文档版本**: v2.1
 **创建日期**: 2026-04-29
+**更新日期**: 2026-05-03
+**验证项目**: todo-agent-workflow-demo（T001-T022）、mini-notes-agent-demo（T001-T012）
 **适用项目**: 多 Agent 协作开发项目
